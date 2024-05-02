@@ -9,11 +9,39 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth0/auth0-vue": "^2.2.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/vue-fontawesome": "^3.0.5",
+    "@vueuse/core": "^10.6.0",
+    "loglevel": "^1.8.1",
     "vue": "^3.4.21",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
+    "bulma": "^1.0.0",
+    "eslint": "^8.17.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "sass": "^1.72.0",
     "vite": "^5.2.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/base",
+      "plugin:vue/vue3-recommended"
+    ],
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+      "vueFeatures": {
+        "filter": true,
+        "interpolationAsNonHTML": false
+      }
+    }
   }
 }

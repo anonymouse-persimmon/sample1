@@ -6,14 +6,7 @@ export default defineConfig(
     ({ command, mode, isSsrBuild, isPreview }) => {
       const config = {
         plugins: [vue()],
-        // build: {
-        //     rollupOptions: {
-        //         output: {
-        //             entryFileNames: `_redirect`,
-        //             chunkFileNames: `_redirect`
-        //         },
-        //     }
-        // }
+          base: "/modify-my-store/"
       }
       if (command === 'serve') {
 
