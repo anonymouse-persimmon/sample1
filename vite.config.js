@@ -11,7 +11,7 @@ export default defineConfig(
       if (command === 'serve') {
 
       } else if (command === 'build'){
-
+          config.plugins.outDir="/dist/modify-my-store/"
       }
       return config
     }
