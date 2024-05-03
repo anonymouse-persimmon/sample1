@@ -21,7 +21,7 @@ config.autoAddCss = false
 
 // router setting
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory("modify-my-store"),
     routes: [
         { path: '/', redirect: { name: 'ModifyMyStore' }},
         { path: '/modify-my-store/callback/', name : 'AuthCallback' , component: AuthCallback, meta: { requiresAuth: false } },
