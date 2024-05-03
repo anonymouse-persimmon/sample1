@@ -9,7 +9,7 @@ export default defineConfig(
           // build: {
           //   outDir:"dist/modify-my-store/"
           // },
-          // base: "/modify-my-store/"
+          base: "./"
       }
       if (command === 'serve') {
 
