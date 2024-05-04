@@ -23,10 +23,9 @@ config.autoAddCss = false
 const router = createRouter({
     history: createWebHistory("modify-my-store"),
     routes: [
-        { path: '/', redirect: { name: 'ModifyMyStore' }},
-        { path: '/modify-my-store/callback/', name : 'AuthCallback' , component: AuthCallback, meta: { requiresAuth: false } },
-        { path: '/modify-my-store/', name : 'ModifyMyStore' , component: ModifyMyStore, meta: { requiresAuth: true } },
-        { path: '/modify-my-store/my-profile/', name : 'MyProfile' , component: UserProfile, meta: { requiresAuth: true } },
+        { path: '/', name : 'ModifyMyStore' , component: ModifyMyStore, meta: { requiresAuth: true } },
+        { path: '/callback/', name : 'AuthCallback' , component: AuthCallback, meta: { requiresAuth: false } },
+        { path: '/my-profile/', name : 'MyProfile' , component: UserProfile, meta: { requiresAuth: true } },
     ]
 })
 
@@ -44,17 +43,19 @@ const auth = createAuth0({
 
 router.beforeEach((to, from, next) => {
     log.debug("before each:" + to.name)
-    console.log("auth:" + auth.isAuthenticated.value)
     log.debug("from:%o",from)
     log.debug("to:%o",to)
     let isNext
     if(to.name === "AuthCallback") {
-        if (auth.isAuthenticated.value) {
-            const key = authRedirect.value.key
-            const url = authRedirect.value.url
+        const isAuth = auth.isAuthenticated.value
+        const key = authRedirect.value.key
+        const url = authRedirect.value.url
+        log.debug("target: auth=" + isAuth + " key=" + key + " value=" + url)
+
+        if (isAuth) {
             authRedirect.value.key = null
             authRedirect.value.url = null
-            if (to.query.r) {
+            if (key && url && to.query.r) {
                 if (key === decodeURIComponent(to.query.r)) {
                     next({ "path": url })
                     isNext = true
@@ -76,6 +77,7 @@ router.beforeEach((to, from, next) => {
                 target: "?r="+ encodeURIComponent(authRedirect.value.key)
             }
         })
+        log.debug("target: key=" + authRedirect.value.key + " url=" + to.path)
         isNext = true
     }
     if (!isNext) {
