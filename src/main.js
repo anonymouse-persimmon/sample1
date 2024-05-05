@@ -23,7 +23,10 @@ config.autoAddCss = false
 const router = createRouter({
     history: createWebHistory("modify-my-store"),
     routes: [
+//        { path: '/', redirect : { name: 'ModifyMyStore'} },
         { path: '/', name : 'ModifyMyStore' , component: ModifyMyStore, meta: { requiresAuth: true } },
+        { path: '/s/:slug', name : 'ModifyMyStoreBySlug' , sensitive: true, component: ModifyMyStore, meta: { requiresAuth: true } },
+        { path: '/i/:id', name : 'ModifyMyStoreById' , sensitive: true, component: ModifyMyStore, meta: { requiresAuth: true } },
         { path: '/callback/', name : 'AuthCallback' , component: AuthCallback, meta: { requiresAuth: false } },
         { path: '/my-profile/', name : 'MyProfile' , component: UserProfile, meta: { requiresAuth: true } },
     ]
