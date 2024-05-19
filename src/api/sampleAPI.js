@@ -1,7 +1,7 @@
 import log from "loglevel";
 
-export async function callCreateHistory(token, attr) {
-    return await fetch(import.meta.env.VITE_API_ROOT + "/a/histories/",
+export async function callStoreCreate(token, attr) {
+    return await fetch(import.meta.env.VITE_API_ROOT + "/store/",
         {
             method: 'POST',
             headers: {
@@ -18,8 +18,8 @@ export async function callCreateHistory(token, attr) {
         .then((d) => log.info(d))
 }
 
-export async function callModifyHistory(token, id, attr) {
-    return await fetch(import.meta.env.VITE_API_ROOT + "/a/histories/" + id,
+export async function callStoreModify(token, id, attr) {
+    return await fetch(import.meta.env.VITE_API_ROOT + "/store/" + id,
         {
             method: 'PUT',
             headers: {
@@ -36,8 +36,8 @@ export async function callModifyHistory(token, id, attr) {
         .then((d) => log.info(d))
 }
 
-export async function callDeleteHistory(token, id) {
-    return await fetch(import.meta.env.VITE_API_ROOT + "/a/histories/" + id,
+export async function callStoreDeleteHistory(token, id) {
+    return await fetch(import.meta.env.VITE_API_ROOT + "/store/" + id,
         {
             method: 'DELETE',
             headers: {
@@ -53,8 +53,8 @@ export async function callDeleteHistory(token, id) {
         .then((d) => log.info(d))
 }
 
-export async function callRetrieveHistory(token, id) {
-    return await fetch(import.meta.env.VITE_API_ROOT + "/a/histories/" + id,
+export async function callFetchStore(token, sid) {
+    return await fetch(import.meta.env.VITE_API_ROOT + "/store/" + sid,
         {
             method: 'GET',
             headers: {
@@ -73,13 +73,13 @@ export async function callRetrieveHistory(token, id) {
         })
 }
 
-export async function callMyHistories(token) {
-    return await fetch(import.meta.env.VITE_API_ROOT + "/a/user/",
+export async function callUserFetch(token, uid) {
+    return await fetch(import.meta.env.VITE_API_ROOT + "user/" + uid,
         {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
+                'authorization': 'Bearer ' + token
             },
         })
         .then((response) => {

@@ -1,11 +1,12 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import {useAuth0} from "@auth0/auth0-vue";
+import {callUserFetch} from "../api/sampleAPI"
+const { user, getAccessTokenSilently } = useAuth0()
 
 const route = useRoute()
 
-const id = ref("")
-const slug = ref("")
 const var1 = import.meta.env.VITE_URL_ENV_TEST
 watch(
     () => route.params.id, (newId, oldId) => {
@@ -17,15 +18,15 @@ watch(
     }
 )
 
-console.log(route.params.id)
-console.log(id.value)
-console.log(route.params.slug)
-console.log(slug.value)
+onMounted(async () => {
+  const token = await getAccessTokenSilently()
+  const u = await callUserFetch(token, user.value.sub)
+  console.log(u)
+})
 </script>
 
 <template>
-  ModifyMyStore
-  {{ var1 }}
+  {{ user.sub }}
 </template>
 
 <style scoped lang="scss">
