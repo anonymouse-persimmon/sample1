@@ -6,7 +6,7 @@ const route = useRoute()
 
 const id = ref("")
 const slug = ref("")
-
+const var1 = import.meta.env.VITE_URL_ENV_TEST
 watch(
     () => route.params.id, (newId, oldId) => {
       console.log("id change: " + oldId + " → " + newId)
@@ -25,6 +25,7 @@ console.log(slug.value)
 
 <template>
   ModifyMyStore
+  {{ var1 }}
 </template>
 
 <style scoped lang="scss">
